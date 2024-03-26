@@ -1,0 +1,12 @@
+env/
+.idea/
+__pycache__/
+.git/
+venv/
+
+#derectories
+
+media/
+static/
+db.sqlite3
+.env
