@@ -24,7 +24,7 @@ class UserFollowAPIView(APIView):
         follow_user = self.get_follow_user(user_id)
         if self.IsNotOwner(request, follow_user):
             self.follow_to_user(user, follow_user)
-            return Response(data={"detail": "success"}, status=status.HTTP_202_ACCEPTED)
+            return Response(data={"detail": "success"}, status=status.HTTP_200_OK)
         return Response(
             data={"detail": f"{user}. fail to follow"}, status=status.HTTP_202_ACCEPTED
         )

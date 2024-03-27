@@ -14,6 +14,4 @@ class AlbumDestroyTest(TestCase):
 
     def test_destroy(self):
         response = self.client.delete(self.url, data={"detail": self.album.id})
-        # print(response.json())
         self.assertEqual(response.status_code, 204)
-        # print(response.status_code)

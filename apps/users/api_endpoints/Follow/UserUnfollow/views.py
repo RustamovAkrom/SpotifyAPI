@@ -25,7 +25,7 @@ class UserUnfollowAPIView(APIView):
         following_user = self.get_follow_user(user_id=user_id)
         if self.IsNotOwner(request, following_user):
             self.unfollow_to_user(user, following_user)
-            return Response(data={"detail": "you unfollowed"})
+            return Response(data={"detail": "success"})
         return Response(data={"detail": f"{user}. fail to unfollow"})
 
     def get_follow_user(self, user_id) -> User:

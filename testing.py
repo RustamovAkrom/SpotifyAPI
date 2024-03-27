@@ -4,11 +4,11 @@ import os
 from django.urls import reverse
 from django.core.files import File
 
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExNzg1NDM1LCJpYXQiOjE3MTExODA2MzUsImp0aSI6Ijc1ZmNjNTAzNDM1OTQxY2FiMzEwM2I3MzE5MmMxMWIyIiwidXNlcl9pZCI6MX0.zIHObqS2Oykeuk4Aw3NaU4l4g7bz1kU7TD0uutNbPQg"
+TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEyMTQ4MDI3LCJpYXQiOjE3MTE1NDMyMjcsImp0aSI6IjJiN2NmN2MyNWVlNDQ3NWY5ODU0MTlkYjk4YzIzYzcxIiwidXNlcl9pZCI6MX0.PjscEFhMgnTlssDAVB5i5_aEyThidizP8S5kTePkB3w"
 
 
 def LoginUser(username: str, password: str):
-    url = ''
+    url = ""
     user = {"username": username, "password": password}
     response = requests.post(url=url, data=user)
 
@@ -19,25 +19,23 @@ def LoginUser(username: str, password: str):
         return response.status_code
 
 
-
 def main():
     base_url = "http://127.0.0.1:8000"
     # token = LoginUser("Akromjon", "2007")
     # print(token)
     # data = {
-    #     "username":"Begzod",
+    #     "username":"Farux",
     #     "first_name":"Botir",
     #     "last_name":"Abdulayev",
-    #     "email":"diril87023@shaflyn.com",
+    #     "email":"farux@gmail.com",
     #     "password1":"2007",
     #     "password2":"2007",
-    #     # "avatar": open("media/avatar.png", "rb")
     # }
-    data = {
-        "email":"akromjonrustamov56@gmail.com"
-    }
-    header = {'content-type': 'application/json'}
-    response = requests.post(url = base_url + reverse("users:forgot-password"), data=data)#{"email":"akromjonrustamov56@gmail.com"})
+    data = {"username": "Akromjon", "password": "2007"}
+    header = {"Authorization": f"Bearer {TOKEN}"}
+    response = requests.post(
+        url=base_url + reverse("users:token-obtain-pair"), data=data, headers=header
+    )
     print(response.json())
     print(response.status_code)
 

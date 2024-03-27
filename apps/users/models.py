@@ -7,8 +7,9 @@ class User(AbstractBaseModel, AbstractUser):
     avatar = models.ImageField(
         upload_to="users/avatar/", blank=True, null=True, default="avatar.png"
     )
-    token = models.CharField(max_length = 140, unique = True)
-    is_active = models.BooleanField(default = False)
+    email = models.EmailField()
+    token = models.CharField(max_length=140, unique=True)
+    is_active = models.BooleanField(default=False)
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers", blank=True
     )

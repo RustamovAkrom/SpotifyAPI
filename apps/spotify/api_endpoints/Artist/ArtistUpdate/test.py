@@ -19,8 +19,9 @@ class ArtistUpdateTest(TestCase):
             "first_name": "first_name",
             "last_name": "last_name",
         }
-        response = self.client.put(self.url, data=data,format="json", content_type="application/json")
-        self.assertEqual(response.json()["first_name"], data['first_name'])
-        self.assertEqual(response.json()["last_name"], data['last_name'])
+        response = self.client.put(
+            self.url, data=data, format="json", content_type="application/json"
+        )
+        self.assertEqual(response.json()["first_name"], data["first_name"])
+        self.assertEqual(response.json()["last_name"], data["last_name"])
         self.assertEqual(response.status_code, 200)
-

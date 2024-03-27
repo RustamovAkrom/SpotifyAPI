@@ -1,13 +1,13 @@
 from django.test import TestCase
-from apps.spotify.models import Genre, Album, Artist
+from apps.spotify.models import Genre, Album, Artist, Song
 import json
 from django.core.files import File
-
-url = "http://127.0.0.1:8000/api/v1/spotify/song-create/"
+from django.urls import reverse
 
 
 class TestSongCreate(TestCase):
     def setUp(self):
+        self.url = reverse("spotify:song-create")
         artist = Artist.objects.create(first_name="first_name1", last_name="last_name1")
         self.artist = artist
 
@@ -25,5 +25,5 @@ class TestSongCreate(TestCase):
             "genres": self.genre.id,
             "album": self.album.id,
         }
-        response = self.client.post(url, data=data)
+        response = self.client.post(self.url, data=data)
         self.assertEqual(response.status_code, 201)

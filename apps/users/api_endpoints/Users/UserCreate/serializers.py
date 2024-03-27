@@ -22,12 +22,12 @@ class UserCreateSerializer(ModelSerializer):
         if User.objects.filter(username=value).exists():
             raise ValidationError("Username already taken")
         return value
-    
+
     def validate_email(self, value):
         if value in [i.email for i in User.objects.all()]:
             raise ValidationError("your email already exist")
         return value
-    
+
     def create(self, validated_data):
         username = validated_data.get("username")
         first_name = validated_data.get("first_name")
@@ -35,11 +35,9 @@ class UserCreateSerializer(ModelSerializer):
         password = validated_data.get("password1")
         email = validated_data.get("email")
         avatar = validated_data.get("avatar")
-
-        user = User.objects.create(
+        user = User(
             username=username,
             first_name=first_name,
-            
             last_name=last_name,
             avatar=avatar,
             email=email,

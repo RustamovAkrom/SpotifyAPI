@@ -8,7 +8,9 @@ class UpdatePasswordTest(TestCase):
         self.user = User(username="Akromjon", email="akromjonrustamov56@gmail.com")
         self.user.set_password("2007")
         self.user.save()
-        self.url = reverse("users:user-password-update", kwargs={"pk": 1})
+        self.url = reverse(
+            "users:user-password-update", kwargs={"token": self.user.token}
+        )
 
     def test_update(self):
         data = {

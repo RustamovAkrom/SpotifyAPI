@@ -3,6 +3,7 @@ import faker
 import random
 from django.core.files import File
 
+
 def generate_genre(n: int) -> None:
     for _ in range(n):
         Genre.objects.create(name=fake.text().split()[2])

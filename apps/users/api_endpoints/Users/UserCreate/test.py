@@ -7,10 +7,9 @@ fake = Faker()
 
 
 class UserCreateTest(TestCase):
-    def setUp(self):
-        self.url = reverse("users:user-create")
 
     def test_create(self):
+        url = reverse("users:user-create")
         for _ in range(5):
             password = fake.password()
             data = {
@@ -20,7 +19,10 @@ class UserCreateTest(TestCase):
                 "email": fake.email(),
                 "password1": password,
                 "password2": password,
-                "avatar":...
             }
-            response = self.client.post(self.url, data=data)
+            response = self.client.post(url, data=data)
+            self.assertEqual(
+                response.json()["detail"],
+                "Plese activate your profile we have sent an activation link.",
+            )
             self.assertEqual(response.status_code, 201)

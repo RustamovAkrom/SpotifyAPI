@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from apps.users.models import User, UserProfile
 
 from dotenv import load_dotenv
+
 load_dotenv()
 import os
 
@@ -22,7 +23,7 @@ from django.utils.decorators import method_decorator
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     email_host_user = os.getenv("EMAIL_HOST_USER")
-    
+
     if created:
         UserProfile.objects.create(user=instance, email=instance.email)
 
@@ -30,16 +31,15 @@ def create_user_profile(sender, instance, created, **kwargs):
         instance.save()
 
         context = {
-            "username":instance.username,
-            "email":instance.email,
-            "activation_link": f"http://localhost:8000/api/v1/users/user-activation/{instance.token}"
+            "username": instance.username,
+            "email": instance.email,
+            "activation_link": f"http://localhost:8000/api/v1/users/user-activation/{instance.token}",
         }
         message = render_to_string("index.html", context=context)
-        #send email activation account
+        # send email activation account
         send_mail(
-            subject = f"Spotify: {instance.username} your activation link",
-            message = strip_tags(message),
-            from_email = email_host_user,
-            recipient_list = [instance.profiles.email]
+            subject=f"Spotify: {instance.username} your activation link",
+            message=strip_tags(message),
+            from_email=email_host_user,
+            recipient_list=[instance.profiles.email],
         )
-        
