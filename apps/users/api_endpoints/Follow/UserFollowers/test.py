@@ -13,6 +13,7 @@ class UserUnfollowTest(TestCase):
         response = self.client.post(url, data={"userid": 1}, headers=self.headers)
         self.assertEqual(response.status_code, 202)
 
+
 #     def test_followers_list(self):
 #         response = self.client.get(self.url, headers=self.headers)
 #         self.assertEqual(type(response.json()), list)
