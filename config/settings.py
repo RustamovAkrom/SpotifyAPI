@@ -13,11 +13,7 @@ SECRET_KEY = os.getenv("SEKRET_KEY")
 
 DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ["64.226.116.175"]
-=======
 ALLOWED_HOSTS = ["*"]
->>>>>>> 8ba28da (update dir in push)
 
 
 INSTALLED_APPS = [
@@ -124,14 +120,11 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379"
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
-<<<<<<< HEAD
 CELERY_TIMEZONE = "Azia/Tashkent"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_CACHE_BACKEND = "default"
-=======
 
->>>>>>> 8ba28da (update dir in push)
 
 # django setting.
 CACHES = {
