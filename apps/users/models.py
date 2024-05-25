@@ -19,7 +19,11 @@ class User(AbstractBaseModel, AbstractUser):
 
     def __str__(self):
         return self.username
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 8ba28da (update dir in push)
 
 class UserProfile(AbstractBaseModel):
     choices_gender = [("female", "Female"), ("male", "Male")]
