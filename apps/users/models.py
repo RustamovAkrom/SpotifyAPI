@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from apps.shared.models import AbstractBaseModel
+from .utils import generate_token
 
 
 class User(AbstractBaseModel, AbstractUser):
@@ -16,6 +17,9 @@ class User(AbstractBaseModel, AbstractUser):
     artist_followings = models.ManyToManyField(
         "spotify.Artist", related_name="users", blank=True
     )
+    def save(self, *args, **kwargs):
+        self.token = generate_token()
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.username

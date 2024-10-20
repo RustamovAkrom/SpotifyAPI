@@ -1,30 +1,23 @@
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from apps.users.models import User, UserProfile
-
-from dotenv import load_dotenv
-
-load_dotenv()
 import os
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from .utils import generate_token
-from celery import shared_task
-from config.celery import app
-
-
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from django.utils.html import strip_tags
+
+from celery import shared_task
+
+from .models import User, UserProfile
+from .utils import generate_token
+from .tasks import send_activation_email
 
 
-@method_decorator(cache_page(60 * 10))
-@shared_task()
-@app.task(bind = True)
+@shared_task
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-    email_host_user = os.getenv("EMAIL_HOST_USER")
 
     if created:
         UserProfile.objects.create(user=instance, email=instance.email)
@@ -38,10 +31,14 @@ def create_user_profile(sender, instance, created, **kwargs):
             "activation_link": f"http://localhost:8000/api/v1/users/user-activation/{instance.token}",
         }
         message = render_to_string("index.html", context=context)
-        # send email activation account
-        send_mail(
-            subject=f"Spotify: {instance.username} your activation link",
-            message=strip_tags(message),
-            from_email=email_host_user,
-            recipient_list=[instance.profiles.email],
-        )
+
+        try:
+            send_activation_email(
+                subject=f"Spotify: {instance.username} your activation link",
+                message=strip_tags(message),
+                from_email=os.getenv("EMAIL_HOST_USER"),
+                recipient_list=[instance.email]
+            )
+
+        except Exception as e:
+            print(e)
