@@ -11,7 +11,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = os.getenv("SEKRET_KEY")
+SECRET_KEY = str(os.getenv("SEKRET_KEY"))
 
 DEBUG = True
 
@@ -52,12 +52,24 @@ TEMPLATES = [
 WSGI_APPLICATION = "core.wsgi.application"
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": 'db.sqlite3',
+        }
 }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": str(os.getenv("POSTGRES_DB")),
+            "USER": str(os.getenv("POSTGRES_USER")),
+            "PASSWORD": str(os.getenv("POSTGRES_PASSWORD")),
+            "HOST": str(os.getenv("POSTGRES_HOST", "localhost")),
+            "PORT": str(os.getenv("POSTGRES_PORT", 5432)),
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
