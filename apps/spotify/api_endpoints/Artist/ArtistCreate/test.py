@@ -1,5 +1,4 @@
 from django.test import TestCase
-from apps.spotify.models import Artist
 from django.urls import reverse
 from faker import Faker
 

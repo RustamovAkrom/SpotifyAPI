@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from apps.spotify.models import Album, Artist
+from apps.spotify.models import Artist
 
 
 class AlbumCreateTest(TestCase):

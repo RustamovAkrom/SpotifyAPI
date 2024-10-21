@@ -2,10 +2,7 @@ import os
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.views.decorators.cache import cache_page
-from django.utils.decorators import method_decorator
 from django.utils.html import strip_tags
 
 from celery import shared_task
@@ -37,7 +34,7 @@ def create_user_profile(sender, instance, created, **kwargs):
                 subject=f"Spotify: {instance.username} your activation link",
                 message=strip_tags(message),
                 from_email=os.getenv("EMAIL_HOST_USER"),
-                recipient_list=[instance.email]
+                recipient_list=[instance.email],
             )
 
         except Exception as e:

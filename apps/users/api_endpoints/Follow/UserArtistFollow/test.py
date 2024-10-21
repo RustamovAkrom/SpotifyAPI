@@ -1,9 +1,7 @@
 from django.test import TestCase
-from apps.users.models import User
 from apps.spotify.models import Artist
 from django.urls import reverse
 from faker import Faker
-from rest_framework.authtoken.models import Token
 from apps.users.tests import AuthenticationTest
 
 fake = Faker()

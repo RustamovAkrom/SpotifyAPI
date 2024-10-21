@@ -1,5 +1,5 @@
-from .AlbumCreate import *
-from .AlbumDestroy import *
-from .AlbumList import *
-from .AlbumRetrive import *
-from .AlbumUpdate import *
+from .AlbumCreate import *  # noqa
+from .AlbumDestroy import *  # noqa
+from .AlbumList import *  # noqa
+from .AlbumRetrive import *  # noqa
+from .AlbumUpdate import *  # noqa

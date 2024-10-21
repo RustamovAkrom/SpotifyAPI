@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
 from apps.users.models import User
-from apps.spotify.models import Artist
 import faker
 from apps.users.tests import AuthenticationTest
 

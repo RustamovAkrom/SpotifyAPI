@@ -1,12 +1,12 @@
+import os
 from pathlib import Path
-from datetime import timedelta
 
-from core.config import *
+from core.config import *  # noqa
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
-import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,7 +18,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
-INSTALLED_APPS = DJANGO_DEFAULT_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_DEFAULT_APPS + PROJECT_APPS + THIRD_PARTY_APPS  # noqa
 
 
 MIDDLEWARE = [
@@ -56,9 +56,9 @@ if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": 'db.sqlite3',
+            "NAME": "db.sqlite3",
         }
-}
+    }
 else:
     DATABASES = {
         "default": {

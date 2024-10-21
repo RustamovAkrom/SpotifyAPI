@@ -1,9 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
 from apps.users.models import User
-from apps.spotify.models import Album, Artist, Genre, Song
 from faker import Faker
-import random
+
 
 fake = Faker()
 

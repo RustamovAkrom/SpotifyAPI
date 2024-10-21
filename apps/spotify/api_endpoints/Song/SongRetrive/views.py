@@ -2,7 +2,6 @@ from rest_framework.generics import RetrieveAPIView
 from apps.spotify.models import Song
 from .serializers import SongRetriveSerializer
 from django.db import transaction
-from rest_framework.response import Response
 
 
 class SongRetriveAPIView(RetrieveAPIView):

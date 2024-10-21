@@ -1,5 +1,5 @@
 from django.test import TestCase
-from apps.users.models import UserProfile, User
+from apps.users.models import User
 from django.urls import reverse
 
 

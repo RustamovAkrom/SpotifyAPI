@@ -1,5 +1,5 @@
-from .SongCreate import *
-from .SongDestroy import *
-from .SongList import *
-from .SongRetrive import *
-from .SongUpdate import *
+from .SongCreate import *  # noqa
+from .SongDestroy import *  # noqa
+from .SongList import *  # noqa
+from .SongRetrive import *  # noqa
+from .SongUpdate import *  # noqa

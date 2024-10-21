@@ -1,20 +1,18 @@
+import os
+
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.core.mail import send_mail
+
 from rest_framework.views import APIView
-from apps.users.models import User
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
+
+from apps.users.models import User
 
 from dotenv import load_dotenv
 
 load_dotenv()
-import os
-
-from django.core.mail import send_mail
-from apps.users.utils import generate_token
-
-from apps.users.models import User
-from celery import shared_task
-from django.views.decorators.cache import cache_page
-from django.utils.decorators import method_decorator
 
 
 class ForgotPasswordAPIView(APIView):

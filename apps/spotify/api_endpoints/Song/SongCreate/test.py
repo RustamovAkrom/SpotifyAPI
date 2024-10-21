@@ -1,7 +1,5 @@
 from django.test import TestCase
-from apps.spotify.models import Genre, Album, Artist, Song
-import json
-from django.core.files import File
+from apps.spotify.models import Genre, Album, Artist
 from django.urls import reverse
 
 

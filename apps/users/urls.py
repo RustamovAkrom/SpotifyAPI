@@ -1,20 +1,35 @@
 from django.urls import path
-from .api_endpoints.Follow import *
-from .api_endpoints.Users import *
-from .api_endpoints.UserProfile import *
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from .api_endpoints.Follow import (
+    UserFollowAPIView,
+    UserUnfollowAPIView,
+    UserArtistFollowAPIView,
+    UserArtistUnfollowAPIView,
+    UserFollowersListAPIView,
+    UserFollowingListAPIView,
+)
+from .api_endpoints.Users import (
+    ForgotPasswordAPIView,
+    UserUpdatePasswordAPIView,
+    UserActivationAPIView,
+    UserListAPIView,
+    UserCreateAPIView,
+)
+from .api_endpoints.UserProfile import (
+    UserProfileDestroyAPIView,
+    UserProfileUpdateAPIView,
 )
 
 from .views import MyCustomObtainTokenView
 
+
 app_name = "users"
+
 urlpatterns = [
     path("token/", MyCustomObtainTokenView.as_view(), name="token-obtain-pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
-    # follow
     path("follow-user/", UserFollowAPIView.as_view(), name="follow-user"),
     path("unfollow-user/", UserUnfollowAPIView.as_view(), name="unfollow-user"),
     path("follow-artist/", UserArtistFollowAPIView.as_view(), name="follow-artist"),
@@ -29,7 +44,6 @@ urlpatterns = [
         UserFollowingListAPIView.as_view(),
         name="followings-user",
     ),
-    # users
     path(
         "user-forgot-password/", ForgotPasswordAPIView.as_view(), name="forgot-password"
     ),
@@ -45,14 +59,13 @@ urlpatterns = [
     ),
     path("user-list/", UserListAPIView.as_view(), name="user-list"),
     path("user-create/", UserCreateAPIView.as_view(), name="user-create"),
-    # userprofiles
     path(
-        "userprofile-destroy/<pk>",
+        "userprofile-destroy/<int:pk>",
         UserProfileDestroyAPIView.as_view(),
         name="userprofile-destroy",
     ),
     path(
-        "userprofile-update/<pk>",
+        "userprofile-update/<int:pk>",
         UserProfileUpdateAPIView.as_view(),
         name="userprofile-update",
     ),

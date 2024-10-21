@@ -1,5 +1,5 @@
-from .ArtistCreate import *
-from .ArtistDestroy import *
-from .ArtistList import *
-from .ArtistRetrive import *
-from .ArtistUpdate import *
+from .ArtistCreate import *  # noqa
+from .ArtistDestroy import *  # noqa
+from .ArtistList import *  # noqa
+from .ArtistRetrive import *  # noqa
+from .ArtistUpdate import *  # noqa

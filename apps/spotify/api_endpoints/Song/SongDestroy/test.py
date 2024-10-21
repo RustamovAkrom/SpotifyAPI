@@ -1,6 +1,5 @@
 from django.test import TestCase
 from apps.spotify.models import Album, Genre, Artist, Song
-from rest_framework.test import APITestCase
 from django.urls import reverse
 
 

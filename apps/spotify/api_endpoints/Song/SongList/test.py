@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from apps.spotify.models import Song, Genre, Artist, Album
+from apps.spotify.models import Genre, Artist, Album
 from faker import Faker
 import random
 

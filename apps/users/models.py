@@ -17,6 +17,7 @@ class User(AbstractBaseModel, AbstractUser):
     artist_followings = models.ManyToManyField(
         "spotify.Artist", related_name="users", blank=True
     )
+
     def save(self, *args, **kwargs):
         self.token = generate_token()
         return super().save(*args, **kwargs)

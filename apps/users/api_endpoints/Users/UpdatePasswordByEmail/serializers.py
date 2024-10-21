@@ -1,8 +1,7 @@
-from rest_framework.serializers import Serializer, ModelSerializer
+from rest_framework.serializers import ModelSerializer
 from apps.users.models import User
 from rest_framework import fields
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import get_object_or_404
 
 
 class UserPasswordUpdateSerializer(ModelSerializer):

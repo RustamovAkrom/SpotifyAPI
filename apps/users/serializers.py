@@ -1,6 +1,5 @@
 from rest_framework.exceptions import APIException
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import Token
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

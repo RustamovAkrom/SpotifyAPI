@@ -1,6 +1,6 @@
-from .UserFollow import *
-from .UserUnfollow import *
-from .UserFollowers import *
-from .UserFollowing import *
-from .UserArtistFollow import *
-from .UserArtistUnfollow import *
+from .UserFollow import *  # noqa
+from .UserUnfollow import *  # noqa
+from .UserFollowers import *  # noqa
+from .UserFollowing import *  # noqa
+from .UserArtistFollow import *  # noqa
+from .UserArtistUnfollow import *  # noqa
