@@ -7,19 +7,17 @@ from django.urls import reverse
 class UserActivateTest(APITestCase):
     def setUp(self):
         self.user = User.objects.create(
-            username="Akrom", 
+            username="Akrom",
             email="akromjonrustamov56@gmail.com",
             password="password",
-            is_active=True
+            is_active=True,
         )
         refresh_token = RefreshToken.for_user(self.user)
         self.token = str(refresh_token.access_token)
 
     def test_activation(self):
         activation_user = User.objects.create(
-            username="Munisa",
-            email="munisaruziyeva543@gmail.com",
-            password="password"
+            username="Munisa", email="munisaruziyeva543@gmail.com", password="password"
         )
         self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.token)
         url = reverse("users:user-activation", kwargs={"token": activation_user.token})
@@ -28,5 +26,6 @@ class UserActivateTest(APITestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.json()["detail"], f"{activation_user.username} successfully activated"
+            response.json()["detail"],
+            f"{activation_user.username} successfully activated",
         )

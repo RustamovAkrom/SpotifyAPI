@@ -14,13 +14,13 @@ class UserCreateTest(APITestCase):
             username="Akromjon",
             email="akromjonrustamov56@gmail.com",
             password="2007",
-            is_active=True
+            is_active=True,
         )
         refresh_token = RefreshToken.for_user(self.user)
         self.token = str(refresh_token.access_token)
 
     def test_create(self):
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.token)
+        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.token)
         url = reverse("users:user-create")
         for _ in range(5):
             password = fake.password()
