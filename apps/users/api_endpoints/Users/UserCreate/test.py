@@ -1,13 +1,26 @@
-from django.test import TestCase
+from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.urls import reverse
 from faker import Faker
+
+from apps.users.models import User
 
 fake = Faker()
 
 
-class UserCreateTest(TestCase):
+class UserCreateTest(APITestCase):
+    def setUp(self) -> None:
+        self.user = User.objects.create(
+            username="Akromjon",
+            email="akromjonrustamov56@gmail.com",
+            password="2007",
+            is_active=True
+        )
+        refresh_token = RefreshToken.for_user(self.user)
+        self.token = str(refresh_token.access_token)
 
     def test_create(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.token)
         url = reverse("users:user-create")
         for _ in range(5):
             password = fake.password()

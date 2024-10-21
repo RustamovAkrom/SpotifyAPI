@@ -1,23 +1,32 @@
-from django.test import TestCase
+from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import RefreshToken
 from apps.users.models import User
 from django.urls import reverse
 
 
-class UserActivateTest(TestCase):
+class UserActivateTest(APITestCase):
     def setUp(self):
         self.user = User.objects.create(
-            username="Munisa", email="akromjonrustamov56@gmail.com"
+            username="Akrom", 
+            email="akromjonrustamov56@gmail.com",
+            password="password",
+            is_active=True
         )
-        self.user.set_password("0000")
-        self.user.save()
-
-        self.url = reverse("users:user-activation", kwargs={"token": self.user.token})
+        refresh_token = RefreshToken.for_user(self.user)
+        self.token = str(refresh_token.access_token)
 
     def test_activation(self):
-        data = {}
-        response = self.client.get(self.url, data=data)
+        activation_user = User.objects.create(
+            username="Munisa",
+            email="munisaruziyeva543@gmail.com",
+            password="password"
+        )
+        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.token)
+        url = reverse("users:user-activation", kwargs={"token": activation_user.token})
+
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.json()["detail"], f"{self.user.username} successfully activated"
+            response.json()["detail"], f"{activation_user.username} successfully activated"
         )
